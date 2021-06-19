@@ -9,7 +9,7 @@ import { GithubService } from '../../github.service';
 })
 export class HomeComponent implements OnInit {
 
-  public branches: string[] = [];
+  public branches: any[] = [];
 
   constructor(private githubService: GithubService) { }
 
@@ -19,12 +19,13 @@ export class HomeComponent implements OnInit {
       this.branches = res;
       console.log(this.branches);
     })
-    this.githubService.get_commits('Julius-cell', 'Take-home-App', 'develop').subscribe(res => {
+  }
+
+  get_commits(sha: string) {
+    this.githubService.get_commits('Julius-cell', 'Take-home-App', sha).subscribe(res => {
       console.log('Commits');
       console.log(res);
     })
   }
-
-
 
 }

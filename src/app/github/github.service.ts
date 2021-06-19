@@ -17,8 +17,9 @@ export class GithubService {
     return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/branches`);
   }
 
-  get_commits(user: string, repo: string, branch: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/branches/${branch}`);
+  get_commits(user: string, repo: string, sha: string): Observable<any> {
+    const query = `?per_page=100&sha=${sha}`;
+    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/commits/${query}`);
   }
 
 }
