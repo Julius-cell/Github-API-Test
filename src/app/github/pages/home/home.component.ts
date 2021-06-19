@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GithubService } from '../../github.service';
+
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private githubService: GithubService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+  
 
 }
