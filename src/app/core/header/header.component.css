@@ -1,0 +1,7 @@
+.header {
+  background-color: var(--bs-dark);
+  color:  var(--bs-light);
+}
+.title {
+  margin-left: 15px;
+}

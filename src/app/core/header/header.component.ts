@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CoreService } from '../core.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'header',
@@ -9,12 +11,12 @@ import { CoreService } from '../core.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private coreService: CoreService) { }
+  public $userData!: Observable<User>;
 
+  constructor(private coreService: CoreService) {}
+  
   ngOnInit(): void {
-    this.coreService.get_user('Julius-cell').subscribe(res => {
-      console.log(res);
-    })
+    this.$userData = this.coreService.get_user('Julius-cell');
   }
 
 }
