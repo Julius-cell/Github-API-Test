@@ -16,7 +16,7 @@ export class GithubService {
   constructor(private http: HttpClient) { }
 
 
-  get_branches(user: string, repo: string,): Observable<any> {
+  get_branches(user: string, repo: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/branches`,
       { headers: this.headers });
   }
@@ -24,6 +24,11 @@ export class GithubService {
   get_commits(user: string, repo: string, sha: string): Observable<any> {
     const query = `?per_page=100&sha=${sha}`;
     return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/commits${query}`,
+      { headers: this.headers });
+  }
+
+  get_readme(user: string, repo: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/readme`,
       { headers: this.headers });
   }
 

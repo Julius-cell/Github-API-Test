@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
     this.githubService.get_branches(this.user, this.repository).subscribe(res => {
       this.branches = res;
     })
+    // this.githubService.get_readme(this.user, this.repository).subscribe(res => {
+    //   console.log(res);
+    // })
   }
   
   changeBranch(e: any) {
