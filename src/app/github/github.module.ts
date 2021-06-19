@@ -6,6 +6,7 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HomeComponent } from './pages/home/home.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +17,8 @@ import { HomeComponent } from './pages/home/home.component';
   imports: [
     CommonModule,
     PrimengModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   exports: [
     HomeComponent

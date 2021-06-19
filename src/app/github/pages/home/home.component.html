@@ -1,8 +1,10 @@
+<!-- BRANCH SECTION -->
 <div class="px-5 py-4">
 
   <div class="d-flex">
     <div>
-      <p-dropdown [options]="branches" optionLabel="name" [style]="{'border-radius': '10px'}"></p-dropdown>
+      <p-dropdown placeholder="Select branch" [options]="branches" [(ngModel)]="sha" optionLabel="name"
+        [style]="{'border-radius': '10px'}" (onChange)="changeBranch($event.value)"></p-dropdown>
     </div>
 
     <div class="d-flex ms-3 align-items-center">
@@ -24,3 +26,45 @@
   </div>
 
 </div>
+<!-- END BRANCH SECTION -->
+
+
+<!-- COMMITS SECTION -->
+<div class="px-5 py-1">
+
+  <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-commit>
+      <tr>
+        <td class="d-flex align-items-center">
+          <p-avatar [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
+          <p class="author ms-3">{{commit.author.login}}</p>
+        </td>
+        <td>
+          <p>{{commit.commit.message}}</p>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          <p class="text-center">No commits found, please select a branch</p>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+<!-- END COMMITS SECTION -->
+
+<!-- README SECTION -->
+<!-- END README SECTION -->
+
+<!-- FOOTER SECTION -->
+<!-- END FOOTER SECTION -->
