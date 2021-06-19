@@ -6,10 +6,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GithubService {
+export class CoreService {
 
   public baseUrl: string = 'https://api.github.com';
 
   constructor(private http: HttpClient) { }
 
+  get_user(user: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/search/users?q=${user}`);
+  }
+  
 }
