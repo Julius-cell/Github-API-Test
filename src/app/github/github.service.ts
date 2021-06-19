@@ -12,4 +12,13 @@ export class GithubService {
 
   constructor(private http: HttpClient) { }
 
+
+  get_branches(user: string, repo: string,): Observable<any> {
+    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/branches`);
+  }
+
+  get_commits(user: string, repo: string, branch: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/branches/${branch}`);
+  }
+
 }

@@ -9,10 +9,22 @@ import { GithubService } from '../../github.service';
 })
 export class HomeComponent implements OnInit {
 
+  public branches: string[] = [];
+
   constructor(private githubService: GithubService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.githubService.get_branches('Julius-cell', 'Take-home-App').subscribe(res => {
+      console.log('Branches');
+      this.branches = res;
+      console.log(this.branches);
+    })
+    this.githubService.get_commits('Julius-cell', 'Take-home-App', 'develop').subscribe(res => {
+      console.log('Commits');
+      console.log(res);
+    })
+  }
 
-  
+
 
 }
