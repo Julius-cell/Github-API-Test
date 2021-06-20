@@ -27,9 +27,4 @@ export class GithubService {
       { headers: this.headers });
   }
 
-  get_readme(user: string, repo: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/repos/${user}/${repo}/readme`,
-      { headers: this.headers });
-  }
-
 }
