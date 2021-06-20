@@ -4,3 +4,6 @@
 .author {
   font-weight: 600;
 }
+.main {
+  min-height: calc(100vh - 67px - 84px - 48px);
+}

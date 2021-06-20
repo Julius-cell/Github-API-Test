@@ -1,21 +1,22 @@
-<!-- BRANCH SECTION -->
-<div class="px-5 py-4">
+<div class="main">
+  <!-- BRANCH SECTION -->
+  <div class="px-5 py-4">
 
-  <div class="d-flex">
-    <div>
-      <p-dropdown placeholder="Select branch" [options]="branches" [(ngModel)]="sha" optionLabel="name"
-        [style]="{'border-radius': '10px'}" (onChange)="changeBranch($event.value)"></p-dropdown>
-    </div>
+    <div class="d-flex">
+      <div>
+        <p-dropdown placeholder="Select branch" [options]="branches" [(ngModel)]="sha" optionLabel="name"
+          [style]="{'border-radius': '10px'}" (onChange)="changeBranch($event.value)"></p-dropdown>
+      </div>
 
-    <div class="d-flex ms-3 align-items-center">
-      <svg height="16" width="16" class="icon me-2">
-        <path fill-rule="evenodd"
-          d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z">
-        </path>
-      </svg>
-      <p>{{branches.length}} branches</p>
-    </div>
-    <!-- <div class="d-flex ms-3 align-items-center">
+      <div class="d-flex ms-3 align-items-center">
+        <svg height="16" width="16" class="icon me-2">
+          <path fill-rule="evenodd"
+            d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z">
+          </path>
+        </svg>
+        <p>{{branches.length}} branches</p>
+      </div>
+      <!-- <div class="d-flex ms-3 align-items-center">
       <svg height="16" width="16" class="icon me-2">
         <path fill-rule="evenodd"
           d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
@@ -23,48 +24,43 @@
       </svg>
       <p>tags</p>
     </div> -->
+    </div>
+
   </div>
+  <!-- END BRANCH SECTION -->
 
+
+  <!-- COMMITS SECTION -->
+  <div class="px-5 py-1">
+
+    <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-commit>
+        <tr>
+          <td class="d-flex align-items-center">
+            <p-avatar [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
+            <p class="author ms-3">{{commit.author.login}}</p>
+          </td>
+          <td>
+            <p>{{commit.commit.message}}</p>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            <p class="text-center">No commits found, please select a branch</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+  <!-- END COMMITS SECTION -->
 </div>
-<!-- END BRANCH SECTION -->
-
-
-<!-- COMMITS SECTION -->
-<div class="px-5 py-1">
-
-  <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns">
-          {{col.header}}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-commit>
-      <tr>
-        <td class="d-flex align-items-center">
-          <p-avatar [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
-          <p class="author ms-3">{{commit.author.login}}</p>
-        </td>
-        <td>
-          <p>{{commit.commit.message}}</p>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
-      <tr>
-        <td [attr.colspan]="columns.length">
-          <p class="text-center">No commits found, please select a branch</p>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-
-</div>
-<!-- END COMMITS SECTION -->
-
-<!-- README SECTION -->
-<!-- END README SECTION -->
-
-<!-- FOOTER SECTION -->
-<!-- END FOOTER SECTION -->
