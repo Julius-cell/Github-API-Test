@@ -48,6 +48,6 @@ h2, h3 {
 	font-family: 'Collegia';
 	font-size: 1.2rem;
 }
-p {
+p, label {
 	font-family: var(--font-family);
 }
