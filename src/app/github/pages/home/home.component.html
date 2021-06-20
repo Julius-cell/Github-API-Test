@@ -11,19 +11,22 @@
       <p>1. Add the name of your Github user in the User Field.</p>
       <p class="mt-2">2. Add the name of the repo that you wanna check in the Repository field.</p>
     </div>
-    <div class="w-75 d-flex justify-content-around mx-auto mt-4">
-      <div class="p-field d-flex flex-column">
-        <label for="user">User</label>
-        <input class="mt-1" id="user" type="text" pInputText/>
+
+    <form [formGroup]="repoForm">
+      <div class="w-75 d-flex justify-content-around mx-auto mt-4">
+        <div class="p-field d-flex flex-column">
+          <label for="user">User</label>
+          <input formControlName="user" class="mt-1" id="user" type="text" pInputText />
+        </div>
+        <div class="p-field d-flex flex-column ms-4">
+          <label for="repository">Repository</label>
+          <input formControlName="repository" class="mt-1" id="repository" type="text" pInputText />
+        </div>
+        <div class="d-flex  align-items-end">
+          <p-button type="submit" label="Search" [disabled]="repoForm.invalid"></p-button>
+        </div>
       </div>
-      <div class="p-field d-flex flex-column ms-4">
-        <label for="repository">Repository</label>
-        <input class="mt-1" id="repository" type="text" pInputText/>
-      </div>
-      <div class="d-flex  align-items-end">
-        <p-button type="submit" label="Search"></p-button>
-      </div>
-    </div>
+    </form>
   </div>
   <!-- END USER SECTION -->
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GithubService } from '../../github.service';
 
@@ -22,7 +23,15 @@ export class HomeComponent implements OnInit {
   public repository: string = "Take-home-App";
   public sha!: string;
 
-  constructor(private githubService: GithubService) { }
+  public repoForm!: FormGroup;
+
+  constructor(private githubService: GithubService, 
+              private fb: FormBuilder) {
+    this.repoForm = fb.group({
+      user: ['', [Validators.required]],
+      repository: ['', [Validators.required]]
+    })
+  }
 
   ngOnInit(): void {
     this.githubService.get_branches(this.user, this.repository).subscribe(res => {
