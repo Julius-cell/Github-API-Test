@@ -11,11 +11,13 @@ export class HomeComponent implements OnInit {
 
   public cols: any[] = [
     { header: 'Author' },
-    { header: 'Commit' }
+    { header: 'Commit' },
+    { header: 'Date' },
   ];
 
   public branches: any[] = [];
   public commits: any[] = [];
+  public diff: any[] = [];
   public user: string = "Julius-cell";
   public repository: string = "Take-home-App";
   public sha!: string;
@@ -27,11 +29,9 @@ export class HomeComponent implements OnInit {
       this.branches = res;
     })
   }
-  
+
   changeBranch(e: any) {
     this.githubService.get_commits(this.user, this.repository, e.commit.sha).subscribe(res => {
-      console.log('Commits');
-      console.log(res);
       this.commits = res;
     })
   }

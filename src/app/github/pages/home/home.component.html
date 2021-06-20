@@ -50,6 +50,9 @@
           <td>
             <p>{{commit.commit.message}}</p>
           </td>
+          <td>
+            <p>{{commit.commit.committer.date | date:'short'}}</p>
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage" let-columns>
