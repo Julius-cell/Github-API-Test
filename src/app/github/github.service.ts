@@ -10,9 +10,14 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class GithubService {
 
+  // Add your Github credentials here:
+  public username: string = '';
+  public password: string = '';
+
   public baseUrl: string = 'https://api.github.com';
   public headers = new HttpHeaders({
-    'Accept': 'application/vnd.github.v3+json'
+    'Accept': 'application/vnd.github.v3+json',
+    'Authorization': `Basic ${btoa(`${this.username}:${this.password}`)}`
   });
 
   constructor(private http: HttpClient,
