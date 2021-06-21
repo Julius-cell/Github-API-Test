@@ -9,7 +9,8 @@
       <h1>Hubs Commits</h1>
     </div>
   </div>
-  <div *ngIf="$userData | async as userData">
+  <div *ngIf="$userData | async as userData" class="d-flex align-items-center">
+    <p class="me-3">Welcome {{userData.login}}</p>
     <p-avatar [image]="userData.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
   </div>
 </div>
