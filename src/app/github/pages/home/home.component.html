@@ -2,18 +2,21 @@
 
   <!-- USER SECTION -->
   <div class="px-5 py-4">
-    <div class="w-75 d-flex justify-content-center mx-auto">
-      <p>Welcome to <span>HubsCommits</span>, here you can see all the commits of your <span>public repositories</span> in the same way that you
-        can see wiht this project. It's really easy! you just have to do two simple things:
+    <div class="d-flex justify-content-center">
+      <h1>Welcome to HubsCommits</h1>
+    </div>
+    <div class="w-75 d-flex justify-content-center mx-auto mt-3">
+      <p>Here you can see all the commits of your <span>public repositories</span> in the same way that you can see whit this project (try selecting a branch). It's really easy! you just have to follow these three simple steps:
       </p>
     </div>
     <div class="w-75 mx-auto mt-3">
       <p>1. Add the name of your Github user in the User Field.</p>
       <p class="mt-2">2. Add the name of the repo that you wanna check in the Repository field.</p>
+      <p class="mt-2">3. Select a branch.</p>
     </div>
 
     <form [formGroup]="repoForm" (ngSubmit)="searchRepo()">
-      <div class="w-75 d-flex justify-content-around mx-auto mt-4">
+      <div class="w-75 d-flex justify-content-around mx-auto mt-4 p-3">
         <div class="p-field d-flex flex-column">
           <label for="user">User</label>
           <input formControlName="user" class="mt-1" id="user" type="text" pInputText />
