@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { GithubService } from '../../github.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
 
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit {
   public repoForm!: FormGroup;
 
   constructor(private githubService: GithubService,
-    private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private messageService: MessageService) {
     this.repoForm = fb.group({
       user: ['', [Validators.required]],
       repository: ['', [Validators.required]]
@@ -37,6 +40,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.githubService.get_branches(this.user, this.repository).subscribe(res => {
       this.branches = res;
+    }, (err) => {
+      this.messageService.add({
+        severity:'error', summary: `${err.name}`, detail: `${err.message}`
+      });
     })
   }
 
@@ -45,6 +52,10 @@ export class HomeComponent implements OnInit {
     this.reset();
     this.githubService.get_commits(this.user, this.repository, e.commit.sha).subscribe(res => {
       this.commits = res;
+    }, (err) => {
+      this.messageService.add({
+        severity:'error', summary: `${err.name}`, detail: `${err.message}`
+      });
     })
   }
 
@@ -56,7 +67,12 @@ export class HomeComponent implements OnInit {
       this.branches = res;
       this.repoForm.reset();
       this.commits = [];
-    })
+    }, (err) => {
+      this.messageService.add({
+        severity:'error', summary: `${err.name}`, detail: `${err.message}`
+      });
+    }
+    )
   }
 
   reset() {
