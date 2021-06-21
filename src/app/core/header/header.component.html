@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-between px-5 py-3 header">
+  <div class="d-flex align-items-center">
+    <div>
+      <a href="https://github.com/" target="_blank">
+        <img src="assets\images\GitHub-Mark-Light-32px.png" alt="github">
+      </a>
+    </div>
+    <div class="title">
+      <h1>Hubs Commits</h1>
+    </div>
+  </div>
+  <div *ngIf="$userData | async as userData">
+    <p-avatar [image]="userData.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
+  </div>
+</div>

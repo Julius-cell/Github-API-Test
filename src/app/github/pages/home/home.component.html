@@ -1,0 +1,112 @@
+<div class="main">
+
+  <!-- USER SECTION -->
+  <div class="px-5 py-4">
+    <div class="d-flex justify-content-center">
+      <h1>Welcome to HubsCommits</h1>
+    </div>
+    <div class="w-75 d-flex justify-content-center mx-auto mt-3">
+      <p>Here you can see all the commits of your <span>public repositories</span> in the same way that you can see whit this project (try selecting a branch). It's really easy! you just have to follow these three simple steps:
+      </p>
+    </div>
+    <div class="w-75 mx-auto mt-3">
+      <p>1. Add the name of your Github user in the User Field.</p>
+      <p class="mt-2">2. Add the name of the repo that you wanna check in the Repository field.</p>
+      <p class="mt-2">3. Select a branch.</p>
+    </div>
+
+    <form [formGroup]="repoForm" (ngSubmit)="searchRepo()">
+      <div class="w-75 d-flex justify-content-around mx-auto mt-4 p-3">
+        <div class="p-field d-flex flex-column">
+          <label for="user">User</label>
+          <input formControlName="user" class="mt-1" id="user" type="text" pInputText />
+        </div>
+        <div class="p-field d-flex flex-column ms-4">
+          <label for="repository">Repository</label>
+          <input formControlName="repository" class="mt-1" id="repository" type="text" pInputText />
+        </div>
+        <div class="d-flex  align-items-end">
+          <p-button type="submit" label="Search" [disabled]="repoForm.invalid"></p-button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- END USER SECTION -->
+
+  <!-- BRANCH SECTION -->
+  <div class="px-5 py-4">
+
+    <div class="d-flex">
+      <div>
+        <p-dropdown placeholder="Select branch" [options]="branches" [(ngModel)]="sha" optionLabel="name"
+          [style]="{'border-radius': '10px'}" (onChange)="changeBranch($event.value)"></p-dropdown>
+      </div>
+
+      <div class="d-flex ms-3 align-items-center">
+        <svg height="16" width="16" class="icon me-2">
+          <path fill-rule="evenodd"
+            d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z">
+          </path>
+        </svg>
+        <p>{{branches.length}} branches</p>
+      </div>
+
+      <div class="d-flex ms-3 align-items-center">
+        <svg height="16" width="16" class="icon me-2">
+          <path fill-rule="evenodd"
+            d="M1.643 3.143L.427 1.927A.25.25 0 000 2.104V5.75c0 .138.112.25.25.25h3.646a.25.25 0 00.177-.427L2.715 4.215a6.5 6.5 0 11-1.18 4.458.75.75 0 10-1.493.154 8.001 8.001 0 101.6-5.684zM7.75 4a.75.75 0 01.75.75v2.992l2.028.812a.75.75 0 01-.557 1.392l-2.5-1A.75.75 0 017 8.25v-3.5A.75.75 0 017.75 4z">
+          </path>
+        </svg>
+        <p>{{(commits.length)}} commits</p>
+      </div>
+    </div>
+
+  </div>
+  <!-- END BRANCH SECTION -->
+
+
+  <!-- COMMITS SECTION -->
+  <div class="px-5 py-1">
+
+    <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10" [(first)]="first">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th class="col-3">
+            {{cols[0].header}}
+          </th>
+          <th class="col-7">
+            {{cols[1].header}}
+          </th>
+          <th class="col-2">
+            {{cols[2].header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-commit>
+        <tr>
+          <td class="d-flex align-items-center">
+            <p-avatar *ngIf="commit.author" [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
+            <p-avatar *ngIf="!commit.author" icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
+            <p *ngIf="commit.author" class="author ms-3">{{commit.author.login}}</p>
+            <p *ngIf="!commit.author" class="author ms-3">unknown</p>
+          </td>
+          <td>
+            <p>{{commit.commit.message}}</p>
+          </td>
+          <td>
+            <p>{{commit.commit.committer.date | date:'short'}}</p>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            <p class="text-center">No commits found, please select a branch</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+  <!-- END COMMITS SECTION -->
+</div>
