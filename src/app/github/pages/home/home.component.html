@@ -68,8 +68,14 @@
     <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10" [(first)]="first">
       <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns">
-            {{col.header}}
+          <th class="col-3">
+            {{cols[0].header}}
+          </th>
+          <th class="col-7">
+            {{cols[1].header}}
+          </th>
+          <th class="col-2">
+            {{cols[2].header}}
           </th>
         </tr>
       </ng-template>
