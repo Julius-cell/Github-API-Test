@@ -10,9 +10,10 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class GithubService {
 
-  // Add your Github credentials here:
+  // -----  ADD YOUR GITHUB CREDENTIALS HERE: ----
   public username: string = '';
   public password: string = '';
+  // -----   ----   ----   ----   ----   ----   --  
 
   public baseUrl: string = 'https://api.github.com';
   public headers = new HttpHeaders({
