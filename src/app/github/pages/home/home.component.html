@@ -3,7 +3,7 @@
   <!-- USER SECTION -->
   <div class="px-5 py-4">
     <div class="w-75 d-flex justify-content-center mx-auto">
-      <p>Welcome to HubsCommits, here you can see all the commits of your public repositories in the same way that you
+      <p>Welcome to <span>HubsCommits</span>, here you can see all the commits of your <span>public repositories</span> in the same way that you
         can see wiht this project. It's really easy! you just have to do two simple things:
       </p>
     </div>
@@ -12,7 +12,7 @@
       <p class="mt-2">2. Add the name of the repo that you wanna check in the Repository field.</p>
     </div>
 
-    <form [formGroup]="repoForm">
+    <form [formGroup]="repoForm" (ngSubmit)="searchRepo()">
       <div class="w-75 d-flex justify-content-around mx-auto mt-4">
         <div class="p-field d-flex flex-column">
           <label for="user">User</label>
@@ -65,7 +65,7 @@
   <!-- COMMITS SECTION -->
   <div class="px-5 py-1">
 
-    <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10">
+    <p-table [value]="commits" [columns]="cols" [paginator]="true" [rows]="10" [(first)]="first">
       <ng-template pTemplate="header" let-columns>
         <tr>
           <th *ngFor="let col of columns">
@@ -76,8 +76,10 @@
       <ng-template pTemplate="body" let-commit>
         <tr>
           <td class="d-flex align-items-center">
-            <p-avatar [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
-            <p class="author ms-3">{{commit.author.login}}</p>
+            <p-avatar *ngIf="commit.author" [image]="commit.author.avatar_url" styleClass="p-mr-2" shape="circle"></p-avatar>
+            <p-avatar *ngIf="!commit.author" icon="pi pi-user" styleClass="p-mr-2" shape="circle"></p-avatar>
+            <p *ngIf="commit.author" class="author ms-3">{{commit.author.login}}</p>
+            <p *ngIf="!commit.author" class="author ms-3">unknown</p>
           </td>
           <td>
             <p>{{commit.commit.message}}</p>

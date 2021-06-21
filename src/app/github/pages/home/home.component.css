@@ -7,3 +7,10 @@
 .main {
   min-height: calc(100vh - 67px - 84px - 48px);
 }
+
+input {
+  height: 34px;
+}
+label, span {
+  font-weight: 600;
+}

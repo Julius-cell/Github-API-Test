@@ -22,11 +22,12 @@ export class HomeComponent implements OnInit {
   public user: string = "Julius-cell";
   public repository: string = "Take-home-App";
   public sha!: string;
+  public first: number = 0;
 
   public repoForm!: FormGroup;
 
-  constructor(private githubService: GithubService, 
-              private fb: FormBuilder) {
+  constructor(private githubService: GithubService,
+    private fb: FormBuilder) {
     this.repoForm = fb.group({
       user: ['', [Validators.required]],
       repository: ['', [Validators.required]]
@@ -40,9 +41,26 @@ export class HomeComponent implements OnInit {
   }
 
   changeBranch(e: any) {
+    this.commits = [];
+    this.reset();
     this.githubService.get_commits(this.user, this.repository, e.commit.sha).subscribe(res => {
       this.commits = res;
     })
+  }
+
+  searchRepo() {
+    const formData = this.repoForm.value;
+    this.user = formData.user;
+    this.repository = formData.repository;
+    this.githubService.get_branches(formData.user, formData.repository).subscribe(res => {
+      this.branches = res;
+      this.repoForm.reset();
+      this.commits = [];
+    })
+  }
+
+  reset() {
+    this.first = 0;
   }
 
 }
